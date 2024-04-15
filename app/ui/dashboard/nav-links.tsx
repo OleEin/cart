@@ -4,6 +4,11 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  PuzzlePieceIcon,
+  AcademicCapIcon,
+  QueueListIcon,
+  WalletIcon,
+
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -18,7 +23,12 @@ const links = [
     href: '/dashboard/concept',
     icon: DocumentDuplicateIcon,
   },
-  { name: 'Module', href: '/dashboard/product', icon: UserGroupIcon },
+  { name: 'Module', href: '/dashboard/product', icon: PuzzlePieceIcon },
+  { name: 'Personal', href: '/dashboard/person', icon: UserGroupIcon },
+  { name: 'Übersicht', href: '/dashboard/overview', icon: WalletIcon },
+  { name: 'Angebot', href: '/dashboard/offer', icon: AcademicCapIcon },
+
+
 ];
 
 export default function NavLinks() {
