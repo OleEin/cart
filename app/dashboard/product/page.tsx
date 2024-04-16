@@ -15,9 +15,6 @@ const value = 100
 
 const CustomRadioGroup = () => {
 
-   const cart={
-      items: []}
-
 
   const products = [
     {
@@ -58,9 +55,9 @@ const CustomRadioGroup = () => {
     },
     // More products...
   ]
-  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState();
 
-  const handleProductSelect = (productId) => {
+  const handleProductSelect = (productId: number) => {
     const isSelected = selectedProducts.includes(productId);
     if (isSelected) {
       setSelectedProducts(selectedProducts.filter(id => id !== productId));
