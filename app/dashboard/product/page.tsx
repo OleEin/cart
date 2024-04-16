@@ -57,7 +57,7 @@ const CustomRadioGroup = () => {
   ]
   const [selectedProducts, setSelectedProducts] = useState();
 
-  const handleProductSelect = (productId: number) => {
+  const handleProductSelect = (productId) => {
     const isSelected = selectedProducts.includes(productId);
     if (isSelected) {
       setSelectedProducts(selectedProducts.filter(id => id !== productId));
