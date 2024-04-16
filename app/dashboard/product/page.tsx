@@ -1,10 +1,11 @@
 
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Button } from '@/app/ui/button';
 import Link from 'next/link';
+import { v4 as uuidv4 } from 'uuid'; // Importiere die uuid-Bibliothek
 
 const plans = [
   { id: 1, name: 'Startup' },
@@ -14,7 +15,30 @@ const plans = [
 const value = 100
 
 const CustomRadioGroup = () => {
+  interface User {
+    sessionId: string;
+    // Weitere Benutzerinformationen hier, falls nötig
+  }
 
+  // Überprüfe, ob bereits eine sessionId im localStorage vorhanden ist
+  const initialSessionId = localStorage.getItem('sessionId') || uuidv4();
+
+  // Initialisiere den Benutzerzustand mit der sessionId aus dem localStorage oder einer neuen sessionId
+  const [user, setUser] = useState<User>({ sessionId: initialSessionId });
+
+  // Überprüfe, ob bereits ausgewählte Produkte im localStorage vorhanden sind
+  const initialSelectedProducts = JSON.parse(localStorage.getItem('selectedProducts') || '[]');
+
+  // Initialisiere den Zustand für ausgewählte Produkte mit den Daten aus dem localStorage
+  const [selectedProducts, setSelectedProducts] = useState<number[]>(initialSelectedProducts);
+
+  // Effekt zum Speichern der ausgewählten Produkte im localStorage, wenn sich der Zustand ändert
+  useEffect(() => {
+    localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+  }, [selectedProducts]);
+
+  // Funktion zum Überprüfen, ob ein Produkt ausgewählt ist
+  const isSelected = (productId: number) => selectedProducts.includes(productId);
 
   const products = [
     {
@@ -57,18 +81,24 @@ const CustomRadioGroup = () => {
   ]
 
 
-  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
 
   const handleProductSelect = (productId) => {
+    // Überprüfe, ob das Produkt bereits ausgewählt ist
     const isSelected = selectedProducts.includes(productId);
+  
+    // Aktualisiere den Zustand basierend auf der Auswahl
     if (isSelected) {
       setSelectedProducts(selectedProducts.filter(id => id !== productId));
-      console.log(selectedProducts)
     } else {
       setSelectedProducts([...selectedProducts, productId]);
-      console.log(selectedProducts)
-
     }
+  
+    // Aktualisiere die ausgewählten Produkte im localStorage
+    // Verwende den aktuellen Wert von selectedProducts, da setState asynchron sein kann
+    const updatedSelectedProducts = isSelected ?
+      selectedProducts.filter(id => id !== productId) :
+      [...selectedProducts, productId];
+    localStorage.setItem('selectedProducts', JSON.stringify(updatedSelectedProducts));
   };
 
   const handleCheckboxChange = (productId) => {
