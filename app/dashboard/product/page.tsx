@@ -7,7 +7,10 @@ import { Button } from '@/app/ui/button';
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid'; // Importiere die uuid-Bibliothek
 
-
+interface User {
+  sessionId: string;
+  // Weitere Benutzerinformationen hier, falls nötig
+}
 
 const CustomRadioGroup = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>();
