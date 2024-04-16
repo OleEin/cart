@@ -14,6 +14,11 @@ const plans = [
 const value = 100
 
 const CustomRadioGroup = () => {
+
+   const cart={
+      items: []}
+
+
   const products = [
     {
       id: 1,
@@ -59,15 +64,22 @@ const CustomRadioGroup = () => {
     const isSelected = selectedProducts.includes(productId);
     if (isSelected) {
       setSelectedProducts(selectedProducts.filter(id => id !== productId));
+      console.log(selectedProducts)
     } else {
       setSelectedProducts([...selectedProducts, productId]);
+      console.log(selectedProducts)
+
     }
   };
 
   const handleCheckboxChange = (productId) => {
     handleProductSelect(productId);
+    console.log("ad")
   };
 
+  function addItem(id) {
+      console.log("test", id)
+  };
 
 
   return (
