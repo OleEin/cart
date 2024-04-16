@@ -55,7 +55,12 @@ const CustomRadioGroup = () => {
     },
     // More products...
   ]
-  const [selectedProducts, setSelectedProducts] = useState('');
+
+  interface Product {
+    id: number;
+    // Füge weitere Eigenschaften hinzu, falls nötig
+  }
+  const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
 
   const handleProductSelect = (productId) => {
     const isSelected = selectedProducts.includes(productId);
