@@ -7,31 +7,36 @@ import { Button } from '@/app/ui/button';
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid'; // Importiere die uuid-Bibliothek
 
-const plans = [
-  { id: 1, name: 'Startup' },
-  { id: 2, name: 'Business' },
-  { id: 3, name: 'Enterprise' },
-]
-const value = 100
+
 
 const CustomRadioGroup = () => {
-  interface User {
-    sessionId: string;
-    // Weitere Benutzerinformationen hier, falls nötig
-  }
+  const [selectedProducts, setSelectedProducts] = useState<number[]>();
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User>({ sessionId: '' }); // Definiere den Benutzerzustand
 
-  // Überprüfe, ob bereits eine sessionId im localStorage vorhanden ist
-  const initialSessionId = localStorage.getItem('sessionId') || uuidv4();
+  useEffect(() => {
+    // Definiere eine Funktion zum Laden der Daten
+    const fetchData = async () => {
+      // Führe hier die erforderlichen Datenabrufe durch, z.B. Benutzerdaten und ausgewählte Produkte
 
-  // Initialisiere den Benutzerzustand mit der sessionId aus dem localStorage oder einer neuen sessionId
-  const [user, setUser] = useState<User>({ sessionId: initialSessionId });
+      // Benutzerdaten laden
+      const initialSessionId = localStorage.getItem('sessionId') || uuidv4();
+      const initialUser = { sessionId: initialSessionId };
 
-  // Überprüfe, ob bereits ausgewählte Produkte im localStorage vorhanden sind
-  const initialSelectedProducts = JSON.parse(localStorage.getItem('selectedProducts') || '[]');
+      // Ausgewählte Produkte laden
+      const initialSelectedProducts = JSON.parse(localStorage.getItem('selectedProducts') || '[]');
 
-  // Initialisiere den Zustand für ausgewählte Produkte mit den Daten aus dem localStorage
-  const [selectedProducts, setSelectedProducts] = useState<number[]>(initialSelectedProducts);
+      // Setze die Zustände mit den geladenen Daten
+      setUser(initialUser);
+      setSelectedProducts(initialSelectedProducts);
 
+      // Setze den Ladezustand auf false, um anzuzeigen, dass die Daten geladen wurden
+      setLoading(false);
+    };
+
+    // Lade die Daten, wenn die Komponente montiert wird
+    fetchData();
+  }, []);
   // Effekt zum Speichern der ausgewählten Produkte im localStorage, wenn sich der Zustand ändert
   useEffect(() => {
     localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
@@ -81,7 +86,7 @@ const CustomRadioGroup = () => {
   ]
 
 
-  
+
 
   const handleProductSelect = (productId) => {
     // Überprüfe, ob das Produkt bereits ausgewählt ist
@@ -99,7 +104,9 @@ const CustomRadioGroup = () => {
     const updatedSelectedProducts = isSelected ?
       selectedProducts.filter(id => id !== productId) :
       [...selectedProducts, productId];
+      try {
     localStorage.setItem('selectedProducts', JSON.stringify(updatedSelectedProducts));
+  } catch (error) {}
   };
 
   const handleCheckboxChange = (productId) => {
@@ -111,6 +118,9 @@ const CustomRadioGroup = () => {
       console.log("test", id)
   };
 
+  if (loading) {
+    return <div>Laden...</div>;
+  }
 
   return (
      <div className="bg-white">
