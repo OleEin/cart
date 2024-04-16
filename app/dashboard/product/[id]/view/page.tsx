@@ -59,9 +59,7 @@ const product = {
 }
 const reviews = { href: '#', average: 4, totalCount: 117 }
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+
 
 export default function Example() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
