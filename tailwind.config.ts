@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
+        '[auto,auto,1fr]': 'auto auto 1fr',
       },
       colors: {
         blue: {
@@ -27,6 +28,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio'),
+],
 };
 export default config;
