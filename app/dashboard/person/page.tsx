@@ -16,8 +16,8 @@ export default function Page() {
   ]
 
 
-  const [leadersValue,setLeadersValue]= useState('') 
-  const [employeesValue,setEmployeesValue]= useState('') 
+  const [leadersValue,setLeadersValue]= useState(0) 
+  const [employeesValue,setEmployeesValue]= useState(0) 
   const initialPersonal ={ leadersValue: 0, employeesValue: 0 };
   const totalPersons = leadersValue + employeesValue;
 
