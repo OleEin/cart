@@ -112,7 +112,6 @@ export default function Example() {
 
   <div>
     <label
-      for="DeliveryStandard"
       className="flex cursor-pointer justify-between gap-4 rounded-lg border border-gray-100 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500"
     >
       <div>
@@ -134,7 +133,6 @@ export default function Example() {
 
   <div>
     <label
-      for="DeliveryPriority"
       className="flex cursor-pointer justify-between gap-4 rounded-lg border border-gray-100 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500"
     >
       <div>
