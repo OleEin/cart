@@ -15,13 +15,20 @@ export default function Page() {
     'Official member t-shirt',
   ]
 
-    // State-Variablen für die Slider-Werte und die Summe der Slider-Werte
-    const initialPersonal = JSON.parse(localStorage.getItem('personal')) || { leadersValue: 50, employeesValue: 50 };
-    const [leadersValue, setLeadersValue] = useState(initialPersonal.leadersValue);
-    const [employeesValue, setEmployeesValue] = useState(initialPersonal.employeesValue);
-  
-    // Funktion zum Berechnen der Summe der Slider-Werte
+
+  const [leadersValue,setLeadersValue]= useState('') 
+  const [employeesValue,setEmployeesValue]= useState('') 
+  const initialPersonal ={ leadersValue: 0, employeesValue: 0 };
+  const totalPersons = leadersValue + employeesValue;
+
+  useEffect(() => {
+    // Funktion zum Berechnen der Gesamtzahl der Personen
     const totalPersons = leadersValue + employeesValue;
+
+    // Initialisiere die Slider-Werte mit den Daten aus dem localStorage oder einem Standardwert
+    setLeadersValue(initialPersonal.leadersValue);
+    setEmployeesValue(initialPersonal.employeesValue);
+  }, []);
 
     useEffect(() => {
       localStorage.setItem('personal', JSON.stringify({ leadersValue, employeesValue }));

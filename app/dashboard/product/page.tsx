@@ -168,7 +168,7 @@ const CustomRadioGroup = () => {
         </div>
       </div>
       <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 px-8 ">
-      <Link href="/dashboard/person">  <Button>Weiter</Button> </Link>
+      <Link href="/dashboard/personal">  <Button>Weiter</Button> </Link>
       </div>
     </div>
   );
